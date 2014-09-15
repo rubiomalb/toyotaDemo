@@ -17,32 +17,44 @@ import com.elasticbox.usecases.services.ToyotaConfiguratorService;
  */
 @Controller
 public class ToyotaConfiguratorController {
-		
+
 	@Autowired
 	private ToyotaConfiguratorService toyotaConfiguratorService;
-	
+
 	@RequestMapping(value = "/cars", method = RequestMethod.GET)
 	public String listPersons(Model model) {
 		model.addAttribute("selectedCar", new Car());
-		model.addAttribute("carsList", this.toyotaConfiguratorService.getAllCars());
+		model.addAttribute("carsList",
+				this.toyotaConfiguratorService.getAllCars());
 		return "carConfigurator";
 	}
-	
+
 	@RequestMapping("/getColors/{carId}")
 	public String getColors(@PathVariable("carId") int id, Model model) {
-		model.addAttribute("carColorsList", this.toyotaConfiguratorService.getCarColorByCarId(id));
-		model.addAttribute("rimsColorsList", this.toyotaConfiguratorService.getRimsColorByCarId(id));
+		model.addAttribute("carColorsList",
+				this.toyotaConfiguratorService.getCarColorByCarId(id));
+		model.addAttribute("rimsColorsList",
+				this.toyotaConfiguratorService.getRimsColorByCarId(id));
 		return "carConfigurator";
 	}
-	
-	@RequestMapping(value="/car/{carId}", method = RequestMethod.GET)
-	public @ResponseBody UIDataList getCarDataInJSON(@PathVariable("carId") long id) {
- 
+
+	@RequestMapping(value = "/car/{carId}", method = RequestMethod.GET)
+	public @ResponseBody UIDataList getCarDataInJSON(
+			@PathVariable("carId") long id) {
+
 		UIDataList uiDataList = new UIDataList();
-		uiDataList.setCarColors(this.toyotaConfiguratorService.getCarColorByCarId(id));
-		uiDataList.setRimsColors(this.toyotaConfiguratorService.getRimsColorByCarId(id));
-		uiDataList.setAccessories(this.toyotaConfiguratorService.getAccessoriesByCarId(id));
- 
+		uiDataList.setCarColors(this.toyotaConfiguratorService
+				.getCarColorByCarId(id));
+		uiDataList.setRimsColors(this.toyotaConfiguratorService
+				.getRimsColorByCarId(id));
+		uiDataList.setAccessories(this.toyotaConfiguratorService
+				.getAccessoriesByCarId(id));
+
 		return uiDataList;
+	}
+
+	@RequestMapping(value = "/configurator", method = RequestMethod.GET)
+	public String getLandingPage() {
+		return "redirect:/static/index.html";
 	}
 }
