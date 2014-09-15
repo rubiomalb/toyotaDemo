@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.elasticbox.usecases.model.dao.AccesoryDAO;
+import com.elasticbox.usecases.model.dao.AccessoryDAO;
 import com.elasticbox.usecases.model.dao.CarColorDAO;
 import com.elasticbox.usecases.model.dao.CarDAO;
 import com.elasticbox.usecases.model.dao.RimsColorDAO;
-import com.elasticbox.usecases.model.entities.Accesory;
+import com.elasticbox.usecases.model.entities.Accessory;
 import com.elasticbox.usecases.model.entities.Car;
 import com.elasticbox.usecases.model.entities.CarColor;
 import com.elasticbox.usecases.model.entities.RimsColor;
@@ -28,7 +28,7 @@ public class ToyotaConfiguratorServiceImpl implements ToyotaConfiguratorService 
 	private RimsColorDAO rimsColorDAO;
 	
 	@Autowired
-	private AccesoryDAO accesoryDAO;
+	private AccessoryDAO accesoryDAO;
 	
 	@Override
 	@Transactional
@@ -50,7 +50,7 @@ public class ToyotaConfiguratorServiceImpl implements ToyotaConfiguratorService 
 	
 	@Override
 	@Transactional
-	public List<Accesory> getAccesoriesByCarId(long carId) {
+	public List<Accessory> getAccessoriesByCarId(long carId) {
 		return this.accesoryDAO.getAllAccesoriesByCarId(carId);
 	}
 

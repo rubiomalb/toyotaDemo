@@ -41,7 +41,7 @@ public class ToyotaConfiguratorController {
 		UIDataList uiDataList = new UIDataList();
 		uiDataList.setCarColors(this.toyotaConfiguratorService.getCarColorByCarId(id));
 		uiDataList.setRimsColors(this.toyotaConfiguratorService.getRimsColorByCarId(id));
-		uiDataList.setAccesories(this.toyotaConfiguratorService.getAccesoriesByCarId(id));
+		uiDataList.setAccessories(this.toyotaConfiguratorService.getAccessoriesByCarId(id));
  
 		return uiDataList;
 	}

@@ -9,12 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.elasticbox.usecases.model.entities.Accesory;
+import com.elasticbox.usecases.model.entities.Accessory;
 
 @Repository
-public class AccesoryCarDAOImpl implements AccesoryDAO {
+public class AccessoryCarDAOImpl implements AccessoryDAO {
 
-	private static final Logger logger = LoggerFactory.getLogger(AccesoryCarDAOImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(AccessoryCarDAOImpl.class);
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -25,10 +25,10 @@ public class AccesoryCarDAOImpl implements AccesoryDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Accesory> getAllAccesoriesByCarId(long carId) {
+	public List<Accessory> getAllAccesoriesByCarId(long carId) {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Accesory> accesoryList = session.createQuery("from Accesory a where a.car.id=" + carId).list();
-		for (Accesory a:accesoryList) {
+		List<Accessory> accesoryList = session.createQuery("from Accessory a where a.car.id=" + carId).list();
+		for (Accessory a:accesoryList) {
 			logger.info("Accesory in list::" + a);
 		}
 		return accesoryList;
