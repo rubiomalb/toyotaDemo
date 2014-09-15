@@ -8,7 +8,7 @@ toyotaApp.controller('ConfiguratorCtrl', function($scope, $http) {
         price: 0
     };
 
-    $http.get('http://localhost/toyotaDemo/car/3')
+    $http.get(CONTEXT_ROOT + '/car/3')
         .success(function(data) {
             $scope.loaded = true;
             $scope.car = data;

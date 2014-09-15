@@ -55,6 +55,6 @@ public class ToyotaConfiguratorController {
 
 	@RequestMapping(value = "/configurator", method = RequestMethod.GET)
 	public String getLandingPage() {
-		return "redirect:/static/index.html";
+		return "redirect:/cars";
 	}
 }

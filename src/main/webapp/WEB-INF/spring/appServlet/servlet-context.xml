@@ -27,7 +27,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
-	<mvc:resources mapping="/static/**" location="/WEB-INF/static/" />
+	<mvc:resources mapping="/**" location="/WEB-INF/static/" />
 	
 	<beans:bean id="dataSource"
 		class="org.springframework.jndi.JndiObjectFactoryBean">

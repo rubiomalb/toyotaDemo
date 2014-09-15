@@ -2,20 +2,78 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page session="false"%>
-<html>
-<head>
-<title>Toyota Car Configurator</title>
+<html lang="en" ng-app="toyotaApp">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Toyota Demo</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
+        
+        <link rel='shortcut icon' href='gui/favicon.ico' type='image/x-icon'/>
 
-</head>
-<body>
-	<h1>Toyota Car Configurator</h1>
+        <link href="files/font.css" rel="stylesheet" type="text/css">
+		<link href="files/car.css" rel="stylesheet" type="text/css">
+        <link href="files/configurator.css" rel="stylesheet" type="text/css">
+        <link href="files/checkbox.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" href="files/history.css">
 
-	<h2>Select a car model:</h2>
+		<script type="text/javascript"> 
+			var CONTEXT_ROOT = '<%= request.getContextPath() %>'; 
+		</script> 
+		<script type="text/javascript" src="files/history.js"></script>
+		<script type="text/javascript" src="files/Detector.js"></script>
+		<script type="text/javascript" src="files/RequestAnimationFrame.js"></script>
+        <script type="text/javascript" src="files/Stats.js"></script>
+		<script type="text/javascript" src="files/three.min.js"></script>
 
-	<form:select path="selectedCar">
-		<form:options items="${carsList}" itemLabel="modelName"/>
-	</form:select>
+		<script type="text/javascript" src="files/CarVisualizer.min.js"></script>
 
+        <script type="text/javascript" src="vendor/jquery.min.js"></script>
+        <script type="text/javascript" src="vendor/angular.min.js"></script>
 
-</body>
+        <script type="text/javascript" src="files/configurator.js"></script>
+    </head>
+	<body onload="init()">
+        <div class="toyota-logo">
+            <img src="files/toyota.png" />
+        </div>
+
+        <div class="configurator" ng-controller="ConfiguratorCtrl" ng-cloak>
+            <div class="total">\${{ totalPrice() }}</div>
+            <div class="overlay"></div>
+            <div class="content">
+                <h1>Avalon XLE</h1>
+                <h2>3.5L V6, 6-Speed Automatic</h2>
+
+                <h3>COLORS</h3>
+                <ul class="color-list"> 
+                    <li class="color-item" 
+                        ng-repeat="color in car.carColors track by color.id" 
+                        style="background-color: \#{{ color.colorHexCode }}"
+                        ng-click="selectColor(color);">
+                    </li>
+                </ul>
+
+                <h3>ACCESSORIES</h3>
+                <ul class="accessory-list"> 
+                    <li class="accessory-item" ng-repeat="accessory in car.accessories track by accessory.id">
+                        <div class="checkbox column">
+                            <input type="checkbox" 
+                                id="select-{{ accessory.id }}" 
+                                class="checkbox-input"
+                                ng-checked="accessory.selected"
+                                ng-click="accessory.selected = !accessory.selected">
+                            <label class="checkbox-label" for="select-{{ accessory.id }}">
+                                <div class="checkbox-inner"></div>
+                                <div class="checkbox-check"></div>
+                            </label>
+                        </div>
+
+                        <div class="description column">{{ accessory.description }}</div>
+                        <div class="price column">\${{ accessory.price }}</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
 </html>
